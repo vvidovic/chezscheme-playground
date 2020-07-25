@@ -1,14 +1,14 @@
-(("name" . "hello-web")
+(("name" . "hello-libra-web")
 ("version" . "0.1.0")
 ("description" . "")
 ("keywords")
-("author" 
+("author"
     ("vvidovic"))
 ("private" . #t)
-("scripts" 
+("scripts"
     ("repl" . "scheme")
     ("run" . "scheme --script"))
-("dependencies" 
+("dependencies"
     ("libra" . "0.1.0")
     ("json" . "1.5.6")
     ("igropyr" . "0.2.13"))
