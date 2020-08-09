@@ -41,6 +41,8 @@
 (define mc
  (foreign-procedure "makeCoord" (int int) (* coord_t)))
 (define fc
+ (foreign-procedure "freeCoord" (uptr) void))
+(define fc
  (foreign-procedure "freeCoord" ((* coord_t)) void))
 ; call C function returning foreign type defined in scheme
 (define c1
