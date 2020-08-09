@@ -37,4 +37,15 @@
 ; illegal access after free - values no longer available
 (printf "ftype-pointer->sexpr... c1: ~a\n" (ftype-pointer->sexpr c1))
 
+(define dataInternal (lambda (data) (printf "data is: ~a\n" data)))
+(define dataCb-fptr (make-ftype-pointer use_data_cb dataInternal))
+(dwd "hello data" dataCb-fptr)
+
+; call C function returning foreign type defined in scheme
+(define c2 (mc 22 33))
+(define coordInternal (lambda (coord) (printf "coord is: ~a\n" (ftype-pointer->sexpr coord))))
+(define coordCb-fptr (make-ftype-pointer use_coord_cb coordInternal))
+(dwc c2 coordCb-fptr)
+(fc c2)
+
 (exit)
