@@ -6,7 +6,6 @@
     coord_t
     mc
     fc
-    use_data_cb
     dwd
     use_coord_cb
     dwc)
@@ -35,9 +34,13 @@
   (define fc
     (foreign-procedure "freeCoord" ((* coord_t)) void))
 
-  (define-ftype use_data_cb (function (string) void))
   (define dwd
-    (foreign-procedure "doWithData" (string (* use_data_cb)) void))
+    (lambda (data dataCb)
+            (define-ftype cbFtype (function (string) void))
+            (let ([cbFptr (make-ftype-pointer cbFtype dataCb)]
+                  [fproc (foreign-procedure "doWithData" (string (* cbFtype)) void)])
+                  (fproc data cbFptr))))
+
   (define-ftype use_coord_cb (function ((* coord_t)) void))
   (define dwc
     (foreign-procedure "doWithCoord" ((* coord_t) (* use_coord_cb)) void))

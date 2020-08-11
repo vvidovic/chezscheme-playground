@@ -37,9 +37,10 @@
 ; illegal access after free - values no longer available
 (printf "ftype-pointer->sexpr... c1: ~a\n" (ftype-pointer->sexpr c1))
 
-(define dataInternal (lambda (data) (printf "data is: ~a\n" data)))
-(define dataCb-fptr (make-ftype-pointer use_data_cb dataInternal))
-(dwd "hello data" dataCb-fptr)
+; redefine dataCb callback function from mylib.ss
+(define dataCb (lambda (data) (printf "used data is: ~a\n" data)))
+(dwd "hello data" dataCb)
+(dwd "hello data second time" dataCb)
 
 ; call C function returning foreign type defined in scheme
 (define c2 (mc 22 33))
